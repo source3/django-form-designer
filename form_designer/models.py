@@ -3,7 +3,7 @@ import hashlib, uuid
 from decimal import Decimal
 
 from django.db import models
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy, ugettext_lazy as _
 from django.forms import widgets
 from django.core.mail import send_mail
 from django.conf import settings as django_settings
@@ -12,11 +12,11 @@ from django.core.exceptions import ImproperlyConfigured
 
 # support for custom User models in Django 1.5+
 try:
-    from django.contrib.auth import get_user_model
+    from django.contrib.auth import auth_user_model
 except ImportError:  # django < 1.5
     from django.contrib.auth.models import User
 else:
-    User = get_user_model()
+    User = auth_user_model()
 
 from form_designer.fields import TemplateTextField, TemplateCharField, ModelNameField, RegexpExpressionField
 from form_designer.utils import get_class
