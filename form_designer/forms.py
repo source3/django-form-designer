@@ -3,7 +3,7 @@ import os
 from django import forms
 from django.forms import widgets
 from django.conf import settings as django_settings
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from form_designer import settings
 from form_designer.models import FormDefinitionField, FormDefinition
@@ -38,6 +38,7 @@ class DesignedForm(forms.Form):
 class FormDefinitionFieldInlineForm(forms.ModelForm):
     class Meta:
         model = FormDefinitionField
+        fields = '__all__'
 
     def clean_regex(self):
         if not self.cleaned_data['regex'] and self.cleaned_data.has_key('field_class') and self.cleaned_data['field_class'] in ('django.forms.RegexField',):
@@ -53,6 +54,7 @@ class FormDefinitionFieldInlineForm(forms.ModelForm):
 class FormDefinitionForm(forms.ModelForm):
     class Meta:
         model = FormDefinition
+        fields = '__all__'
 
     def _media(self):
         js = []
